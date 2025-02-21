@@ -66,10 +66,10 @@ export class AuthController extends Controller {
             });
 
             return success(200, responseBody);
-        } catch (error) {
+        } catch (error: any) {
             return unknownError(500, this.apiResponseService.getResponseBody({
                 status: APIResponseBodyStatus.ERROR,
-                message: `An unknown error occurred`,
+                message: error?.message ?? error ?? `An unknown error occurred`,
             }))
         }
     }
@@ -113,10 +113,10 @@ export class AuthController extends Controller {
             });
 
             return success(200, responseBody);
-        } catch (error) {
+        } catch (error: any) {
             return unknownError(500, this.apiResponseService.getResponseBody({
                 status: APIResponseBodyStatus.ERROR,
-                message: `An unknown error occurred`,
+                message: error?.message ?? error ?? `An unknown error occurred`,
             }))
         }
     }

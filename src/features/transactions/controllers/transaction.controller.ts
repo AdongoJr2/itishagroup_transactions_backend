@@ -96,7 +96,7 @@ export class TransactionController extends Controller {
         } catch (error: any) {
             return unknownError(500, this.apiResponseService.getResponseBody({
                 status: APIResponseBodyStatus.ERROR,
-                message: typeof error === 'string' ? error : `An unknown error occurred`,
+                message: error?.message ?? error ?? `An unknown error occurred`,
             }))
         }
     }
