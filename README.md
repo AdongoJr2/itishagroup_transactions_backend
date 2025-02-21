@@ -46,5 +46,12 @@ The REST API documentation can be found by visiting `/docs` after running the pr
 
 For routes requiring authentication (e.g `/api/v1/transactions`), make sure the `Authorization` value is in the format `Bearer xxx`, where the`xxx` is your access token returned after successful login
 
+## TODOs
+The following are some improvements that could be made:
+- [ ] Robust API error handling - Returning specific error codes to the clients. Currently majority of the API errors have status 500
+- [ ] Robust Dependency Injection (DI) system - Configuring and using an IoC for Dependency Injection. Currently dependencies are manually injected
+- [ ] Implementing Rate limiting to prevent API abuse
+- [ ] Using Redis for caching transaction history responses
+
 ## Final Words
 Happy Coding ☕ 😄
