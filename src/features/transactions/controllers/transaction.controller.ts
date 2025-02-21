@@ -113,7 +113,7 @@ export class TransactionController extends Controller {
         @Res() success: TsoaResponse<200, APIResponseBodyDTO>,
         @Res() badRequest: TsoaResponse<400, APIResponseBodyDTO>,
         @Res() notFound: TsoaResponse<404, APIResponseBodyDTO>,
-        @Res() unknownError: TsoaResponse<any, APIResponseBodyDTO>,
+        @Res() unknownError: TsoaResponse<500, APIResponseBodyDTO>,
         @Request() req: VerifiedToken,
     ) {
         try {
@@ -144,7 +144,7 @@ export class TransactionController extends Controller {
 
             return success(200, responseBody);
         } catch (error: any) {
-            return unknownError(this.getStatus() ?? 500, this.apiResponseService.getResponseBody({
+            return unknownError(500, this.apiResponseService.getResponseBody({
                 status: APIResponseBodyStatus.ERROR,
                 message: error?.message ?? error ?? `An unknown error occurred`,
             }))
