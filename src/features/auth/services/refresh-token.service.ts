@@ -28,10 +28,6 @@ export class RefreshTokenService {
             });
 
             if (!foundItem) {
-                // TODO: define and use CustomNotFoundException
-                // throw new CustomNotFoundException(
-                //     `The refresh token provided does not exist`,
-                // );
                 return `The refresh token provided does not exist`
             }
 
