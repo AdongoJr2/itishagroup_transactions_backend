@@ -99,7 +99,7 @@ export function RegisterRoutes(app: Router) {
                 unknownError: {"in":"res","name":"500","required":true,"ref":"APIResponseBodyDTO"},
                 req: {"in":"request","name":"req","required":true,"dataType":"object"},
         };
-        app.post('/transactions/transactions',
+        app.post('/transactions',
             authenticateMiddleware([{"jwt":[]}]),
             ...(fetchMiddlewares<RequestHandler>(TransactionController)),
             ...(fetchMiddlewares<RequestHandler>(TransactionController.prototype.sendMoney)),
@@ -116,6 +116,43 @@ export function RegisterRoutes(app: Router) {
 
               await templateService.apiHandler({
                 methodName: 'sendMoney',
+                controller,
+                response,
+                next,
+                validatedArgs,
+                successStatus: 200,
+              });
+            } catch (err) {
+                return next(err);
+            }
+        });
+        // WARNING: This file was auto-generated with tsoa. Please do not modify it. Re-run tsoa to re-generate this file: https://github.com/lukeautry/tsoa
+        const argsTransactionController_getTransactionHistory: Record<string, TsoaRoute.ParameterSchema> = {
+                page: {"default":1,"in":"query","name":"page","dataType":"double"},
+                pageSize: {"default":5,"in":"query","name":"pageSize","dataType":"double"},
+                success: {"in":"res","name":"200","required":true,"ref":"APIResponseBodyDTO"},
+                badRequest: {"in":"res","name":"400","required":true,"ref":"APIResponseBodyDTO"},
+                notFound: {"in":"res","name":"404","required":true,"ref":"APIResponseBodyDTO"},
+                unknownError: {"in":"res","name":"500","required":true,"ref":"APIResponseBodyDTO"},
+                req: {"in":"request","name":"req","required":true,"dataType":"object"},
+        };
+        app.post('/transactions/history',
+            authenticateMiddleware([{"jwt":[]}]),
+            ...(fetchMiddlewares<RequestHandler>(TransactionController)),
+            ...(fetchMiddlewares<RequestHandler>(TransactionController.prototype.getTransactionHistory)),
+
+            async function TransactionController_getTransactionHistory(request: ExRequest, response: ExResponse, next: any) {
+
+            // WARNING: This file was auto-generated with tsoa. Please do not modify it. Re-run tsoa to re-generate this file: https://github.com/lukeautry/tsoa
+
+            let validatedArgs: any[] = [];
+            try {
+                validatedArgs = templateService.getValidatedArgs({ args: argsTransactionController_getTransactionHistory, request, response });
+
+                const controller = new TransactionController();
+
+              await templateService.apiHandler({
+                methodName: 'getTransactionHistory',
                 controller,
                 response,
                 next,

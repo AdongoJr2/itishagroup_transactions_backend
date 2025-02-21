@@ -135,7 +135,7 @@
 		"contact": {}
 	},
 	"paths": {
-		"/transactions/transactions": {
+		"/transactions": {
 			"post": {
 				"operationId": "SendMoney",
 				"responses": {
@@ -200,6 +200,84 @@
 						}
 					}
 				}
+			}
+		},
+		"/transactions/history": {
+			"post": {
+				"operationId": "GetTransactionHistory",
+				"responses": {
+					"200": {
+						"description": "",
+						"content": {
+							"application/json": {
+								"schema": {
+									"$ref": "#/components/schemas/APIResponseBodyDTO"
+								}
+							}
+						}
+					},
+					"400": {
+						"description": "",
+						"content": {
+							"application/json": {
+								"schema": {
+									"$ref": "#/components/schemas/APIResponseBodyDTO"
+								}
+							}
+						}
+					},
+					"404": {
+						"description": "",
+						"content": {
+							"application/json": {
+								"schema": {
+									"$ref": "#/components/schemas/APIResponseBodyDTO"
+								}
+							}
+						}
+					},
+					"500": {
+						"description": "",
+						"content": {
+							"application/json": {
+								"schema": {
+									"$ref": "#/components/schemas/APIResponseBodyDTO"
+								}
+							}
+						}
+					}
+				},
+				"description": "Retrieve transactions history",
+				"tags": [
+					"Transactions"
+				],
+				"security": [
+					{
+						"jwt": []
+					}
+				],
+				"parameters": [
+					{
+						"in": "query",
+						"name": "page",
+						"required": false,
+						"schema": {
+							"default": 1,
+							"format": "double",
+							"type": "number"
+						}
+					},
+					{
+						"in": "query",
+						"name": "pageSize",
+						"required": false,
+						"schema": {
+							"default": 5,
+							"format": "double",
+							"type": "number"
+						}
+					}
+				]
 			}
 		},
 		"/": {
