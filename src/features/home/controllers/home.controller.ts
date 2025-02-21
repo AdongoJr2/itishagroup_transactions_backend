@@ -1,14 +1,17 @@
 import { Controller, Example, Get, Middlewares, Route, Tags } from 'tsoa';
 import { HomeResponseDto } from '../dto/home-response.dto';
 import { NextFunction, Request, Response } from 'express';
+import { injectable } from 'inversify';
+import logger from '../../../utils/logger/logger';
 
-async function sampleCUstomMiddleware(req: Request, res: Response, next: NextFunction) {
-    console.log("Custom middleware...")
+async function sampleCustomMiddleware(req: Request, res: Response, next: NextFunction) {
+    logger.info("Custom middleware...")
     next();
 }
 
 @Tags("Home API")
 @Route()
+@injectable()
 export class HomeController extends Controller {
     /**
      * Welcome Home V1 endpoint 
@@ -17,8 +20,10 @@ export class HomeController extends Controller {
     //     message: "V1 Welcome message"
     // })
     @Get()
-    @Middlewares(sampleCUstomMiddleware)
+    @Middlewares(sampleCustomMiddleware)
     public async getHomeMessage(): Promise<HomeResponseDto> {
         return { message: "Welcome to V1 API endpoints" };
     }
 }
+
+export default HomeController

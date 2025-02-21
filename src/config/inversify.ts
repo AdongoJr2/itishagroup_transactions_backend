@@ -1,0 +1,28 @@
+import { Container } from 'inversify';
+import { DataSource } from 'typeorm';
+import AppDataSource from './database';
+import { RefreshTokenService } from '../features/auth/services/refresh-token.service';
+import { RefreshTokenRepository } from '../features/auth/repositories/refresh-token.repository';
+import { AuthService } from '../features/auth/services/auth.service';
+import { ApiResponseService } from '../features/_common/services/api-response.service';
+import { UserService } from '../features/users/services/user.service';
+import AuthController from '../features/auth/controllers/auth.controller';
+
+// Create the DI container
+const container = new Container();
+
+container.bind<DataSource>(DataSource).toConstantValue(AppDataSource);
+
+// Bind repositories
+container.bind<RefreshTokenRepository>(RefreshTokenRepository).toSelf();
+
+// Bind services
+container.bind<RefreshTokenService>(RefreshTokenService).toSelf();
+container.bind<AuthService>(AuthService).toSelf();
+container.bind<UserService>(UserService).toSelf();
+container.bind<ApiResponseService>(ApiResponseService).toSelf();
+
+// Bind controllers
+container.bind<AuthController>(AuthController).toSelf().inSingletonScope();
+
+export default container;

@@ -20,6 +20,81 @@
 				],
 				"type": "object",
 				"additionalProperties": false
+			},
+			"CreateUserDto": {
+				"properties": {
+					"firstName": {
+						"type": "string",
+						"example": "John"
+					},
+					"lastName": {
+						"type": "string",
+						"example": "Doe"
+					},
+					"email": {
+						"type": "string",
+						"example": "jdoe@example.com"
+					},
+					"phoneNumber": {
+						"type": "string",
+						"example": "+254700000000"
+					},
+					"password": {
+						"type": "string",
+						"example": "123456"
+					}
+				},
+				"required": [
+					"firstName",
+					"lastName",
+					"email",
+					"phoneNumber",
+					"password"
+				],
+				"type": "object",
+				"additionalProperties": false
+			},
+			"APIResponseBodyStatus": {
+				"enum": [
+					"success",
+					"error"
+				],
+				"type": "string"
+			},
+			"APIResponseBodyDTO": {
+				"properties": {
+					"status": {
+						"$ref": "#/components/schemas/APIResponseBodyStatus"
+					},
+					"message": {
+						"type": "string"
+					},
+					"data": {}
+				},
+				"required": [
+					"status",
+					"message"
+				],
+				"type": "object",
+				"additionalProperties": false
+			},
+			"LoginUserDto": {
+				"properties": {
+					"email": {
+						"type": "string",
+						"example": "jdoe@example.com"
+					},
+					"password": {
+						"type": "string",
+						"example": "123456"
+					}
+				},
+				"required": [
+					"email",
+					"password"
+				],
+				"type": "object",
+				"additionalProperties": false
 			}
 		},
 		"securitySchemes": {}
@@ -55,6 +130,112 @@
 				],
 				"security": [],
 				"parameters": []
+			}
+		},
+		"/auth/signup": {
+			"post": {
+				"operationId": "Signup",
+				"responses": {
+					"200": {
+						"description": "",
+						"content": {
+							"application/json": {
+								"schema": {
+									"$ref": "#/components/schemas/APIResponseBodyDTO"
+								}
+							}
+						}
+					},
+					"400": {
+						"description": "",
+						"content": {
+							"application/json": {
+								"schema": {
+									"$ref": "#/components/schemas/APIResponseBodyDTO"
+								}
+							}
+						}
+					},
+					"500": {
+						"description": "",
+						"content": {
+							"application/json": {
+								"schema": {
+									"$ref": "#/components/schemas/APIResponseBodyDTO"
+								}
+							}
+						}
+					}
+				},
+				"description": "User Signup",
+				"tags": [
+					"Auth"
+				],
+				"security": [],
+				"parameters": [],
+				"requestBody": {
+					"required": true,
+					"content": {
+						"application/json": {
+							"schema": {
+								"$ref": "#/components/schemas/CreateUserDto"
+							}
+						}
+					}
+				}
+			}
+		},
+		"/auth/login": {
+			"post": {
+				"operationId": "Login",
+				"responses": {
+					"200": {
+						"description": "",
+						"content": {
+							"application/json": {
+								"schema": {
+									"$ref": "#/components/schemas/APIResponseBodyDTO"
+								}
+							}
+						}
+					},
+					"400": {
+						"description": "",
+						"content": {
+							"application/json": {
+								"schema": {
+									"$ref": "#/components/schemas/APIResponseBodyDTO"
+								}
+							}
+						}
+					},
+					"500": {
+						"description": "",
+						"content": {
+							"application/json": {
+								"schema": {
+									"$ref": "#/components/schemas/APIResponseBodyDTO"
+								}
+							}
+						}
+					}
+				},
+				"description": "User Login",
+				"tags": [
+					"Auth"
+				],
+				"security": [],
+				"parameters": [],
+				"requestBody": {
+					"required": true,
+					"content": {
+						"application/json": {
+							"schema": {
+								"$ref": "#/components/schemas/LoginUserDto"
+							}
+						}
+					}
+				}
 			}
 		}
 	},

@@ -2,8 +2,7 @@
     "entryFile": "src/main.ts",
     "noImplicitAdditionalProperties": "throw-on-extras",
     "controllerPathGlobs": [
-        "src/features/**/controllers/*Controller.ts",
-        "src/features/**/controllers/**/*Controller.ts"
+        "src/**/*.controller.ts"
     ],
     "spec": {
         "name": "Transactions Backend APIs",
@@ -12,7 +11,8 @@
         "specVersion": 3,
         "basePath": "/api/v1",
         "schemes": [
-            "http", "https"
+            "http",
+            "https"
         ]
     },
     "routes": {
