@@ -32,7 +32,7 @@ export class AuthController extends Controller {
     }
 
     /**
-     * The user is automatically assigned 10 shillings for use to the user wallet upon successful registration 
+     * The user is automatically assigned 50 shillings for use to the user wallet upon successful registration 
      */
     @Post("signup")
     @SuccessResponse(200, 'User Created')

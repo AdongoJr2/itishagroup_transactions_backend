@@ -29,6 +29,8 @@ export class TransactionController extends Controller {
 
     /**
     * Send Money 
+    * 
+    * Maximum amount to send is set to 5
     */
     @Post()
     @SuccessResponse(200, 'Money sent successfully')

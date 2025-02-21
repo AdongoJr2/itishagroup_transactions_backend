@@ -65,6 +65,7 @@
       "bcrypt"
     ],
     "onlyBuiltDependencies": [
+      "@scarf/scarf",
       "bcrypt"
     ]
   }

@@ -31,7 +31,7 @@ Use one of the options below to run the app
 
 ```bash
 # development (watch mode)
-$ pnpm tsoa && start:dev
+$ pnpm tsoa && pnpm start:dev
 ```
 
 ## Generating TypeORM migration files
@@ -48,7 +48,7 @@ For routes requiring authentication (e.g `/api/v1/transactions`), make sure the 
 
 ## TODOs
 The following are some improvements that could be made:
-- [ ] Robust API error handling - Returning specific error codes to the clients. Currently majority of the API errors have status 500
+- [ ] Robust API error handling - Returning specific error codes and messages to the clients. Currently majority of the API errors have status 500
 - [ ] Robust Dependency Injection (DI) system - Configuring and using an IoC for Dependency Injection. Currently dependencies are manually injected
 - [ ] Implementing Rate limiting to prevent API abuse
 - [ ] Using Redis for caching transaction history responses
