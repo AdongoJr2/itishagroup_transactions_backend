@@ -1,0 +1,66 @@
+{
+	"openapi": "3.0.0",
+	"components": {
+		"examples": {},
+		"headers": {},
+		"parameters": {},
+		"requestBodies": {},
+		"responses": {},
+		"schemas": {
+			"HomeResponseDto": {
+				"properties": {
+					"message": {
+						"type": "string",
+						"description": "Home API response message",
+						"example": "Sample message"
+					}
+				},
+				"required": [
+					"message"
+				],
+				"type": "object",
+				"additionalProperties": false
+			}
+		},
+		"securitySchemes": {}
+	},
+	"info": {
+		"title": "Transactions Backend APIs",
+		"version": "0.0.1",
+		"description": "Backend APIs for a transactions processing system",
+		"license": {
+			"name": "ISC"
+		},
+		"contact": {}
+	},
+	"paths": {
+		"/": {
+			"get": {
+				"operationId": "GetHomeMessage",
+				"responses": {
+					"200": {
+						"description": "Ok",
+						"content": {
+							"application/json": {
+								"schema": {
+									"$ref": "#/components/schemas/HomeResponseDto"
+								}
+							}
+						}
+					}
+				},
+				"description": "Welcome Home V1 endpoint",
+				"tags": [
+					"Home API"
+				],
+				"security": [],
+				"parameters": []
+			}
+		}
+	},
+	"servers": [
+		{
+			"url": "/api/v1"
+		}
+	]
+}
