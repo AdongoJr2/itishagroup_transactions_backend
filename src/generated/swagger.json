@@ -7,6 +7,50 @@
 		"requestBodies": {},
 		"responses": {},
 		"schemas": {
+			"SendMoneyDto": {
+				"properties": {
+					"recipientId": {
+						"type": "number",
+						"format": "double",
+						"example": "17"
+					},
+					"amount": {
+						"type": "number",
+						"format": "double",
+						"example": "7"
+					}
+				},
+				"required": [
+					"recipientId",
+					"amount"
+				],
+				"type": "object",
+				"additionalProperties": false
+			},
+			"APIResponseBodyStatus": {
+				"enum": [
+					"success",
+					"error"
+				],
+				"type": "string"
+			},
+			"APIResponseBodyDTO": {
+				"properties": {
+					"status": {
+						"$ref": "#/components/schemas/APIResponseBodyStatus"
+					},
+					"message": {
+						"type": "string"
+					},
+					"data": {}
+				},
+				"required": [
+					"status",
+					"message"
+				],
+				"type": "object",
+				"additionalProperties": false
+			},
 			"HomeResponseDto": {
 				"properties": {
 					"message": {
@@ -54,30 +98,6 @@
 				"type": "object",
 				"additionalProperties": false
 			},
-			"APIResponseBodyStatus": {
-				"enum": [
-					"success",
-					"error"
-				],
-				"type": "string"
-			},
-			"APIResponseBodyDTO": {
-				"properties": {
-					"status": {
-						"$ref": "#/components/schemas/APIResponseBodyStatus"
-					},
-					"message": {
-						"type": "string"
-					},
-					"data": {}
-				},
-				"required": [
-					"status",
-					"message"
-				],
-				"type": "object",
-				"additionalProperties": false
-			},
 			"LoginUserDto": {
 				"properties": {
 					"email": {
@@ -97,7 +117,13 @@
 				"additionalProperties": false
 			}
 		},
-		"securitySchemes": {}
+		"securitySchemes": {
+			"jwt": {
+				"type": "apiKey",
+				"in": "header",
+				"name": "Authorization"
+			}
+		}
 	},
 	"info": {
 		"title": "Transactions Backend APIs",
@@ -109,6 +135,73 @@
 		"contact": {}
 	},
 	"paths": {
+		"/transactions/transactions": {
+			"post": {
+				"operationId": "SendMoney",
+				"responses": {
+					"200": {
+						"description": "",
+						"content": {
+							"application/json": {
+								"schema": {
+									"$ref": "#/components/schemas/APIResponseBodyDTO"
+								}
+							}
+						}
+					},
+					"400": {
+						"description": "",
+						"content": {
+							"application/json": {
+								"schema": {
+									"$ref": "#/components/schemas/APIResponseBodyDTO"
+								}
+							}
+						}
+					},
+					"404": {
+						"description": "",
+						"content": {
+							"application/json": {
+								"schema": {
+									"$ref": "#/components/schemas/APIResponseBodyDTO"
+								}
+							}
+						}
+					},
+					"500": {
+						"description": "",
+						"content": {
+							"application/json": {
+								"schema": {
+									"$ref": "#/components/schemas/APIResponseBodyDTO"
+								}
+							}
+						}
+					}
+				},
+				"description": "Send Money",
+				"tags": [
+					"Transactions"
+				],
+				"security": [
+					{
+						"jwt": []
+					}
+				],
+				"parameters": [],
+				"requestBody": {
+					"required": true,
+					"content": {
+						"application/json": {
+							"schema": {
+								"$ref": "#/components/schemas/SendMoneyDto"
+							}
+						}
+					}
+				}
+			}
+		},
 		"/": {
 			"get": {
 				"operationId": "GetHomeMessage",
@@ -167,7 +260,7 @@
 						}
 					}
 				},
-				"description": "User Signup",
+				"description": "The user is automatically assigned 10 shillings for use to the user wallet upon successful registration",
 				"tags": [
 					"Auth"
 				],

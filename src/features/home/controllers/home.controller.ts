@@ -1,4 +1,4 @@
-import { Controller, Example, Get, Middlewares, Route, Tags } from 'tsoa';
+import { Controller, Get, Middlewares, Route, Tags } from 'tsoa';
 import { HomeResponseDto } from '../dto/home-response.dto';
 import { NextFunction, Request, Response } from 'express';
 import { injectable } from 'inversify';

@@ -1,6 +1,8 @@
-import { Column, DeepPartial, Entity } from "typeorm";
+import { Column, DeepPartial, Entity, JoinColumn, OneToMany, OneToOne } from "typeorm";
 import { CommonEntityFields } from "../../../utils/entities/common-entity-fields";
 import { Exclude } from "class-transformer";
+import { Transaction } from "../../transactions/entities/transaction.entity";
+import { UserWallet } from "./user-wallet.entity";
 
 @Entity()
 export class User extends CommonEntityFields {
@@ -29,4 +31,14 @@ export class User extends CommonEntityFields {
     @Column({ nullable: true })
     @Exclude()
     password: string;
+
+    @OneToMany(() => Transaction, (transaction) => transaction.sender, { onDelete: 'RESTRICT' })
+    sentTransactions: Transaction[];
+
+    @OneToMany(() => Transaction, (transaction) => transaction.recipient, { onDelete: 'RESTRICT' })
+    receivedTransactions: Transaction[];
+
+    @OneToOne(() => UserWallet, (wallet) => wallet.user, { cascade: ['insert'], onUpdate: 'CASCADE', onDelete: 'CASCADE' })
+    @JoinColumn()
+    wallet: UserWallet;
 }

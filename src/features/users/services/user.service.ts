@@ -14,7 +14,7 @@ export class UserService {
 
     async createUser(createUserDto: CreateUserDto): Promise<User> {
         try {
-            const details = this.userRepository.create(createUserDto);
+            const details = this.userRepository.create({ ...createUserDto, wallet: { balance: 10 } });
             const savedRecord = await this.userRepository.save(details);
             return new User({ ...savedRecord });
         } catch (error) {
@@ -26,11 +26,19 @@ export class UserService {
         try {
             const foundUser = await this.userRepository.findOne({
                 where: { id },
+                relations: {
+                    wallet: true,
+                },
+                select: {
+                    wallet: {
+                        id: true,
+                        balance: true,
+                    },
+                },
             });
 
             if (!foundUser) {
-                // TODO: implement and use CustomNotFoundException
-                // throw new CustomNotFoundException(`User not found`);
+                throw 'user not found'
             }
 
             return foundUser;

@@ -6,6 +6,7 @@ import AppDataSource from './config/database';
 import container from './config/inversify';
 import { bindControllers } from './utils/inversify/controller-loader';
 import logger from './utils/logger/logger';
+import { errorHandler } from './middleware/error-handler.middleware';
 
 dotenv.config();
 
@@ -21,6 +22,8 @@ const apiRouter = express.Router();
 
 // Register tsoa routes on the apiRouter
 RegisterRoutes(apiRouter);
+
+apiRouter.use(errorHandler);
 
 // Apply the /api/v1 prefix to all routes
 expressApp.use('/api/v1', apiRouter);

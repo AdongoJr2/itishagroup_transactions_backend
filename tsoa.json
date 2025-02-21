@@ -13,9 +13,17 @@
         "schemes": [
             "http",
             "https"
-        ]
+        ],
+        "securityDefinitions": {
+            "jwt": {
+                "type": "apiKey",
+                "in": "header",
+                "name": "Authorization"
+            }
+        }
     },
     "routes": {
+        "authenticationModule": "src/middleware/auth.middleware",
         "routesDir": "src/generated"
     }
 }

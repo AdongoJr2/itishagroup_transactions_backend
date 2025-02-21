@@ -42,7 +42,9 @@ $ pnpm migration:generate ./src/migrations/[YOUR_MIGRATION_NAME] # eg. pnpm migr
 ```
 
 ## REST API Documentation
-The REST API documentation can be found by visiting `/docs` after running the project
+The REST API documentation can be found by visiting `/docs` after running the project.
+
+For routes requiring authentication (e.g `/api/v1/transactions`), make sure the `Authorization` value is in the format `Bearer xxx`, where the`xxx` is your access token returned after successful login
 
 ## Final Words
 Happy Coding ☕ 😄
